@@ -81,7 +81,7 @@ export default function Home() {
 
   return (
     <div className="px-8 flex flex-col items-center justify-center font-sans">
-      <h1 className="mt-4 text-md font-bold mb-6 italic text-center px-12">Please input your Full Name, Skills, Job Title and click on 'Generate Cover Letter'</h1>
+      <h1 className="mt-4 text-md font-bold mb-6 italic text-center px-12">Please input your Full Name, Skills, Job Title, Company Name and click on 'Generate Cover Letter'</h1>
 
       {showForm ? (
         <form onSubmit={handleSubmit} className="space-y-4 mb-6">
