@@ -2,13 +2,13 @@ import OpenAI from "openai";
 
 export async function POST(req) {
     try {
-        const { name, skills, jobTitle } = await req.json();
+        const { name, skills, jobTitle, companyName } = await req.json();
 
         const openai = new OpenAI({
             apiKey: process.env.OPENAI_API_KEY,
         });
 
-        const prompt = `Write a professional cover letter for ${name}, highlighting their skills (${skills}) and suitability for the role of ${jobTitle}, help fit it in less than one page and keep it short. Do not include header information at the top, just start off with Dear [Employer's Name].`;
+        const prompt = `Write a professional cover letter for ${name}, highlighting their skills (${skills}) and suitability for the role of ${jobTitle} at ${companyName}, help fit it in less than one page and keep it short. Do not include header information at the top, just start off with Dear Hiring Team and no need for placeholders that the user has to input in the generated cover letter.`;
 
         const response = await openai.chat.completions.create({
             model: "gpt-4o-mini",

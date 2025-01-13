@@ -7,6 +7,7 @@ export default function Home() {
   const [name, setName] = useState("");
   const [skills, setSkills] = useState("");
   const [jobTitle, setJobTitle] = useState("");
+  const [companyName, setCompanyName] = useState("");
   const [coverLetter, setCoverLetter] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -24,7 +25,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, skills, jobTitle }),
+        body: JSON.stringify({ name, skills, jobTitle, companyName }),
       });
 
       if (!response.ok) {
@@ -72,6 +73,7 @@ export default function Home() {
     setName("");
     setSkills("");
     setJobTitle("");
+    setCompanyName("");
     setCoverLetter("");
     setError("");
     setShowForm(true);
@@ -79,7 +81,7 @@ export default function Home() {
 
   return (
     <div className="px-8 flex flex-col items-center justify-center font-sans">
-      <h1 className="text-md font-bold mb-6 italic text-center px-12">Please input your Full Name, Skills, Job Title and click on 'Generate Cover Letter'</h1>
+      <h1 className="mt-4 text-md font-bold mb-6 italic text-center px-12">Please input your Full Name, Skills, Job Title and click on 'Generate Cover Letter'</h1>
 
       {showForm ? (
         <form onSubmit={handleSubmit} className="space-y-4 mb-6">
@@ -125,6 +127,20 @@ export default function Home() {
             />
           </div>
 
+          <div>
+            <label htmlFor="companyName" className="block font-medium mb-1">
+              Company Name:
+            </label>
+            <input
+              id="companyName"
+              type="text"
+              value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)}
+              required
+              className="w-full border rounded-md p-2 text-black"
+            />
+          </div>
+
           <button
             type="submit"
             disabled={loading}
@@ -144,22 +160,24 @@ export default function Home() {
           )}
           {coverLetter && (
             <div className="w-1/2">
-              <h2 className="text-xl font-semibold mb-4">Your Cover Letter</h2>
+              <h2 className="text-center text-xl font-semibold mb-4">Your Cover Letter</h2>
 
-              <div className="mb-4">
-                <button
-                  onClick={handleDownloadPDF}
-                  className="px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-md"
-                >
-                  Download as PDF
-                </button>
+              <div className="mb-4 flex items-center justify-center">
+                <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
+                  <button
+                    onClick={handleDownloadPDF}
+                    className="block px-2 py-2 bg-green-500 hover:bg-green-600 text-white rounded-md"
+                  >
+                    Download as PDF
+                  </button>
 
-                <button
-                  onClick={handleGenerateNew}
-                  className="px-6 py-2 bg-gray-300 hover:bg-gray-400 text-black rounded-md ml-4"
-                >
-                  Generate New Cover Letter
-                </button>
+                  <button
+                    onClick={handleGenerateNew}
+                    className="block px-2 py-2 bg-gray-300 hover:bg-gray-400 text-black rounded-md ml-4"
+                  >
+                    Generate New Cover Letter
+                  </button>
+                </div>
               </div>
 
               <p className="whitespace-pre-wrap border rounded-md p-4 bg-gray-50 text-black">

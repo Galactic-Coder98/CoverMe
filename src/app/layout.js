@@ -22,7 +22,6 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col items-center justify-center border`}
       >
-        <p className="font-bold text-lg italic mb-2 underline">CoverMe</p>
         {children}
       </body>
     </html>
